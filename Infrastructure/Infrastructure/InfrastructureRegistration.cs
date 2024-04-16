@@ -33,7 +33,6 @@ namespace Infrastructure
             services.AddScoped(typeof(IExcelReportGenerator<>), typeof(ExcelReportGenerator<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IJwtManager, JwtManager>();
-
             #endregion
 
         }
