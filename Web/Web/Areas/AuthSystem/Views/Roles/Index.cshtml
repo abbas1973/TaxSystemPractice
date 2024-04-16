@@ -1,0 +1,121 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="col-md-10 col-md-offset-1">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="purple">
+            <i class="material-icons">assignment</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title"> لیست نقش ها </h4>
+            <div class="toolbar">
+                <p>
+                    <a onclick="entity.create.loadForm()" class="btn btn-sm btn-success"><i class="material-icons">add_circle_outline</i> افزودن نقش جدید</a>
+                </p>
+            </div>
+
+            <div class="material-datatables">
+                <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                شناسه
+                            </th>
+                            <th>
+                                عنوان
+                            </th>
+                            <th>
+                                توضیحات
+                            </th>
+                            <td>
+                                وضعیت
+                            </td>
+                            <th class="disabled-sorting"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+
+                </table>
+            </div>
+        </div>
+        <!-- end content-->
+    </div>
+    <!--  end card  -->
+</div>
+
+
+
+
+
+<!-- چارچوب مدال برای فرم ها -->
+<div class="modal fade" id="base-modal" tabindex="-1" role="dialog" aria-labelledby="modal5-label" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="modal-form">
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/assets/js/jquery.datatables.js"></script>
+    <script src="~/Areas/AuthSystem/js/Role.js" asp-append-version="true"></script>
+}
+
+
+@section styles {
+    <style>
+
+
+        .claim-item .checkbox span.collapse {
+            font-size: 25px;
+            padding: 5px;
+            cursor: pointer;
+            display: inline-block;
+            transform: translateY(5px);
+            margin-left: 5px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .claim-item .checkbox > label {
+            padding-right: 32px;
+        }
+
+        .claim-item .checkbox span.collapse + label {
+            padding-right: 0px;
+        }
+
+
+        .claim-item .claim-item {
+            display: none;
+        }
+
+
+        .claim-item {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+            .claim-item .level1 {
+                padding-right: 30px;
+            }
+
+            .claim-item .level2 {
+                padding-right: 60px;
+            }
+
+            .claim-item .level3 {
+                padding-right: 90px;
+            }
+
+            .claim-item .level4 {
+                padding-right: 120px;
+            }
+    </style>
+}
+

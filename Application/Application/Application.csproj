@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!--<Nullable>enable</Nullable>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Web\AuthSystem\Auth\Command\" />
+    <Folder Include="Features\Web\AuthSystem\Claims\Command\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="8.0.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+	<PackageReference Include="ClosedXML" Version="0.96.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.1" />
+    <PackageReference Include="IraniValidator.core" Version="6.0.0" />
+    <PackageReference Include="LinqKit" Version="1.2.5" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
+    <PackageReference Include="Serilog.Enrichers.ClientInfo" Version="2.0.3" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="6.0.0" />
+    <PackageReference Include="SixLaborsCaptcha.Mvc.Core" Version="0.2.2" />
+    <PackageReference Include="StackExchange.Redis.Extensions.AspNetCore" Version="9.1.0" />
+    <PackageReference Include="StackExchange.Redis.Extensions.Newtonsoft" Version="9.1.0" />
+    <PackageReference Include="StackExchange.Redis.Extensions.Utf8Json" Version="9.1.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.3.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Redis\Redis.csproj" />
+    <ProjectReference Include="..\..\Common\Resources\Resources.csproj" />
+    <ProjectReference Include="..\..\Common\Utilities\Utilities.csproj" />
+    <ProjectReference Include="..\..\Domain\Domain\Domain.csproj" />
+  </ItemGroup>
+
+</Project>

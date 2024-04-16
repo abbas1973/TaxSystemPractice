@@ -1,0 +1,33 @@
+﻿@model Application.DTOs.Claims.MenuDTO
+
+@{
+    // تنان دسترسی های کاربر
+    List<string> claims = ViewBag.Claims as List<string>;
+
+    // دسترسی های لازم برای دسترسی به این منو
+    var sections = Model.Claim.Split('.');
+    var AllowedScopes = new List<string> { "Full", Model.Claim };
+    for (int i = 0; i < sections.Length - 1; i++)
+    {
+        var tmp = sections.Take(i + 1);
+        var prefix = string.Join('.', tmp);
+        AllowedScopes.Add($"{prefix}.Full");
+    }
+
+    // آیا دسترسی دارد؟
+    bool hasPermission = claims.Any(x => AllowedScopes.Contains(x));
+}
+
+
+@if (hasPermission)
+{
+    <li class="nav-item @($"{Model.Controller.ToLower()}-{Model.Action.ToLower()}")">
+        <a class="nav-link" asp-area="@Model.Area" asp-controller="@Model.Controller" asp-action="@Model.Action" asp-all-route-data="@Model.Route">
+            <i class="@(Model.Icon == null ? "" : "material-icons")">@(
+            Model.Icon ?? Model.Title.Substring(0, 3)
+            )</i>
+            <p>@Model.Title</p>
+        </a>
+    </li>
+}
+

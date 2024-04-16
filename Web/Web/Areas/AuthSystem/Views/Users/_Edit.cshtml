@@ -1,0 +1,141 @@
+﻿@using Application.Features.Web.Users;
+@using Application.DTOs;
+@model UserUpdateDTO
+
+@{
+    var roles = ViewBag.Roles as List<SelectListDTO>;
+}
+<div class="modal-header">
+    <button type="button" class="close" title="بستن پنجره" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="modal5-label">
+        ویرایش کاربر
+    </h4>
+
+    <div class="text-center">
+        پرکردن فیلدهای ستاره دار الزامی است.
+    </div>
+</div>
+
+<div class="modal-body row">
+
+    <div class="col-md-12">
+        <form asp-action="Edit" class="edit-form" onsubmit="return entity.edit.save(event)">
+            <div class="form-horizontal">
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="error text-center text-danger">@ViewBag.Error</div>
+                <input asp-for="Id" type="hidden" />
+
+                <div class="col-md-12">
+                    <div class="form-group col-md-4">
+                        <label asp-for="FirstName" class="control-label text-right col-md-12 required"></label>
+                        <div class="col-md-12">
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group col-md-4">
+                        <label asp-for="LastName" class="control-label text-right col-md-12 required"></label>
+                        <div class="col-md-12">
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label asp-for="Mobile" class="control-label text-right col-md-12 required"></label>
+                        <div class="col-md-12">
+                            <input asp-for="Mobile" class="form-control" placeholder="09*********" style="direction:ltr; text-align:right" />
+                            <span asp-validation-for="Mobile" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="form-group col-md-4">
+                        <label asp-for="Username" class="control-label text-right col-md-12 required"></label>
+                        <div class="col-md-12">
+                            <input asp-for="Username" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="control-label text-right col-md-12 required">استان</label>
+                        <div class="col-md-12">
+                            <select id="ProvinceId" onchange="getCities(this.value)" class="selectpicker" data-live-search="true" data-size="7" tabindex="-98" data-style="select-with-transition" asp-items="ViewBag.Provinces">
+                                <option value="0">انتخاب استان</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group col-md-4">
+                        <label asp-for="CityId" class="control-label text-right col-md-12 required"></label>
+                        <div class="col-md-12">
+                            <select asp-for="CityId" class="selectpicker" data-live-search="true" data-size="7" tabindex="-98" data-style="select-with-transition" asp-items="ViewBag.CityId"></select>
+                            <span asp-validation-for="CityId" class="text-danger"></span>
+                        </div>
+                        <input type="hidden" id="OldCityId" value="@Model.CityId" />
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="form-group col-md-4">
+                        <div class="col-md-12" style="padding-top:30px">
+                            <div class="togglebutton">
+                                <label>
+                                    فعال باشد
+                                    <input asp-for="IsEnabled" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="form-group col-md-12">
+                        <label class="control-label text-right col-md-12 required">نقش کاربر</label>
+                        <div class="col-md-12">
+                            @foreach (var role in roles)
+                            {
+                                <div class="checkbox">
+                                    <label>
+                                        <input class="role-item" 
+                                               type="checkbox" 
+                                               value="@role.Id" 
+                                               checked="@(Model.RoleIds.Contains(role.Id))">
+                                               @role.Title
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12 text-center">
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-info">
+                            <i class="material-icons">send</i>
+                            ذخیره اطلاعات
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+

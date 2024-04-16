@@ -1,0 +1,21 @@
+﻿@using Application.DTOs.Claims
+
+
+<li class="nav-item">
+    <a data-toggle="collapse" href="#management">
+        <i class="">مدی</i>
+        <p>
+            امکانات مدیریتی
+            <b class="caret"></b>
+        </p>
+    </a>
+    <div class="collapse" id="management">
+        <ul class="nav">
+
+            <partial name="_SingleMenuItem" model="@(new MenuDTO("مدیریت کاربران", "AuthSystem", "Users", "Index"))" />
+            <partial name="_SingleMenuItem" model="@(new MenuDTO("مدیریت نقش ها", "AuthSystem", "Roles", "Index"))" />
+
+        </ul>
+    </div>
+</li>
+

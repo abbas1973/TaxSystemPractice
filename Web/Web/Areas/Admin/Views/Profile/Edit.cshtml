@@ -1,0 +1,110 @@
+﻿@using Application.Features.Web.Profiles;
+@model UserProfileUpdateDTO
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="col-md-10 col-md-offset-1">
+    <div class="card">
+        <div class="card-header card-header-icon" data-background-color="purple">
+            <i class="material-icons">account_box</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title"> ویرایش پروفایل </h4>
+
+            <div class="col-md-12">
+                <form asp-action="Edit" method="put" class="edit-profile-form" onsubmit="return entity.edit.save(event)">
+                    <div class="form-horizontal">
+                        <hr />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="error text-center text-danger">@ViewBag.Error</div>
+                        <div class="success text-center text-success"></div>
+                        <input asp-for="Id" type="hidden" />
+
+                        <div class="col-md-12">
+                            <div class="form-group col-md-3">
+                                <label asp-for="FirstName" class="control-label text-right col-md-12 required">نام</label>
+                                <div class="col-md-12">
+                                    <input asp-for="FirstName" class="form-control" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-md-3">
+                                <label asp-for="LastName" class="control-label text-right col-md-12 required">نام خانوادگی</label>
+                                <div class="col-md-12">
+                                    <input asp-for="LastName" class="form-control" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label asp-for="Mobile" class="control-label text-right col-md-12 required">موبایل</label>
+                                <div class="col-md-12">
+                                    <input asp-for="Mobile" class="form-control" placeholder="09*********" style="direction:ltr; text-align:right" />
+                                    <span asp-validation-for="Mobile" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label asp-for="Username" class="control-label text-right col-md-12 required">نام کاربری</label>
+                                <div class="col-md-12">
+                                    <input asp-for="Username" class="form-control" />
+                                    <span asp-validation-for="Username" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12">
+                            <div class="form-group col-md-3">
+                                <label class="control-label text-right col-md-12 required">استان</label>
+                                <div class="col-md-12">
+                                    <select id="ProvinceId" onchange="entity.form.getCities(this.value)" class="selectpicker" data-live-search="true" data-size="7" tabindex="-98" data-style="select-with-transition" asp-items="ViewBag.Provinces">
+                                        <option value="0">انتخاب استان</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label class="control-label text-right col-md-12 required">شهر</label>
+                                <div class="col-md-12">
+                                    <select id="CityId" class="selectpicker" data-live-search="true" data-size="7" tabindex="-98" data-style="select-with-transition">
+                                        <option value="@Model.CityId">@Model.City</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" id="OldCityId" value="@Model.CityId" />
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group col-md-12 text-center">
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-info">
+                                    <i class="material-icons">send</i>
+                                    ذخیره اطلاعات
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end content-->
+    </div>
+    <!--  end card  -->
+</div>
+
+
+
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/Areas/AuthSystem/js/Profile.js" asp-append-version="true"></script>
+
+}

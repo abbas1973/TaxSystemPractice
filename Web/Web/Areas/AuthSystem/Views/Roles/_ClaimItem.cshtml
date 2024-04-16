@@ -1,0 +1,40 @@
+﻿@using Application.DTOs.Claims
+@model ClaimDTO
+@{
+    var selectedClaims = ViewBag.SelectedClaims as List<string>;
+}
+
+<div class="form-group claim-item" data-level="@Model.Level">
+    <div class="checkbox level@(Model.Level)" data-level="@Model.Level">
+        @if (Model.SubClaims != null && Model.SubClaims.Any())
+        {
+            <span class="collapse" onclick="entity.form.toggleCollapse(this)">+</span>
+        }
+        <label>
+            <input type="checkbox"
+                   class="claim" 
+                   name="@Model.Claim" 
+                   value="@Model.Claim"
+                   data-level="@Model.Level"
+                   checked="@(selectedClaims?.Any(x => x == Model.Claim))"
+                   onchange="entity.form.toggleClaim(this)" />
+            @Model.Name
+        </label>
+    </div>
+
+    @if (Model.SubClaims != null)
+    {
+        foreach (var item in Model.SubClaims)
+        {
+            <partial name="_ClaimItem" model="item" />
+        }
+    }
+</div>
+
+
+
+
+
+
+
+

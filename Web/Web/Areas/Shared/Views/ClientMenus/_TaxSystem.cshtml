@@ -1,0 +1,22 @@
+﻿@using Application.DTOs.Claims
+
+
+<li class="nav-item">
+    <a data-toggle="collapse" href="#taxsystem">
+        <i class="">مال</i>
+        <p>
+            سامانه مالیاتی
+            <b class="caret"></b>
+        </p>
+    </a>
+    <div class="collapse" id="taxsystem">
+        <ul class="nav">
+
+            <partial name="_SingleMenuItem" model="@(new MenuDTO("ثبت صورتحساب", "TaxSystem", "AddInvoice", "Index"))" />
+            <partial name="_SingleMenuItem" model="@(new MenuDTO("مدیریت صورتحساب ها", "TaxSystem", "Invoices", "Index"))" />
+            <partial name="_SingleMenuItem" model="@(new MenuDTO("مدیریت شرکت ها", "TaxSystem", "Companies", "Index"))" />
+
+        </ul>
+    </div>
+</li>
+

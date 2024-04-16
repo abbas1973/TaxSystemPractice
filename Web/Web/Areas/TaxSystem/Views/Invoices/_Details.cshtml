@@ -1,0 +1,201 @@
+﻿@model Application.Features.Web.Invoices.InvoiceGetByIdDTO
+@using Utilities
+
+<div class="modal-header">
+    <button type="button" class="close" title="بستن پنجره" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="modal5-label">
+        اطلاعات صورتحساب
+    </h4>
+</div>
+
+<div class="modal-body row details">
+
+    <div class="col-md-12">
+        <div class="row">
+            <table class="table table-bordered" width="100%">
+                <thead>
+                    <tr>
+                        <th>نام کالا/خدمت</th>
+                        <th>کد</th>
+                        <th>تعداد</th>
+                        <th>واحد</th>
+                        <th>مبلغ واحد</th>
+                        <th>مبلغ کل</th>
+                        <th>مبلغ تخفیف</th>
+                        <th>مبلغ کل پس از تخفیف</th>
+                        <th>جمع مالیات و عوارض</th>
+                        <th>مبلغ کل + مالیات و عوارض</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.InvoiceItems)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Code</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.CountingUnitName</td>
+                            <td>@item.UnitPrice.ToPriceFormat()</td>
+                            <td>@item.TotalPriceBeforDiscount.ToPriceFormat()</td>
+                            <td>@item.DiscountAmount.ToPriceFormat()</td>
+                            <td>@item.TotalPriceAfterDiscount.ToPriceFormat()</td>
+                            <td>@item.TaxAmount.ToPriceFormat()</td>
+                            <td>@item.TotalPrice.ToPriceFormat()</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr class="bold">
+                        <td colspan="2">مجموع</td>
+                        <td>@Model.InvoiceItems.Sum(x => x.Quantity)</td>
+                        <td></td>
+                        <td>@Model.InvoiceItems.Sum(x => x.UnitPrice).ToPriceFormat()</td>
+                        <td>@Model.TotalPriceBeforDiscount.ToPriceFormat()</td>
+                        <td>@Model.DiscountAmount.ToPriceFormat()</td>
+                        <td>@Model.TotalPriceAfterDiscount.ToPriceFormat()</td>
+                        <td>@Model.TaxAmount.ToPriceFormat()</td>
+                        <td>@Model.TotalAmount.ToPriceFormat()</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+
+    <hr style="width:100%" />
+
+    <div class="col-md-12 section">
+        <h4>
+            اطلاعات صورتحساب:
+        </h4>
+        <div class="col-md-6">
+            <span class="title">شماره صورتحساب :</span>
+            <span class="value">@Model.InvoiceNumber</span>
+        </div>
+        <div class="col-md-6">
+            <span class="title">تاریخ صدور :</span>
+            <span class="value">@Model.InvoiceDateFa</span>
+        </div>
+        <div class="col-md-6">
+            <span class="title">وضعیت ارسال به سامانه مالیاتی :</span>
+            <span class="value">@Model.SendStatusFa</span>
+        </div>
+        <div class="col-md-6">
+            <span class="title">روش تسویه فاکتور :</span>
+            <span class="value">@Model.PayTypeFa</span>
+        </div>
+        <div class="col-md-6">
+            <span class="title">نوع صورتحساب :</span>
+            <span class="value">@Model.TaxInvoiceTypeFa</span>
+        </div>
+        <div class="col-md-6">
+            <span class="title">الگوی  مالیاتی :</span>
+            <span class="value">@Model.TaxInvoicePatternFa</span>
+        </div>
+        @if (Model.TaxInvoicePattern == Domain.Enums.TaxInvoicePattern.Pattern4)
+        {
+            <div class="col-md-6">
+                <span class="title">شماره قرارداد :</span>
+                <span class="value">@Model.ContractId</span>
+            </div>
+        }
+        <div class="col-md-6">
+            <span class="title">موضوع سند :</span>
+            <span class="value">@Model.TaxInvoiceSubjectFa</span>
+        </div>
+    </div>
+
+
+    <hr style="width:100%" />
+
+
+    <div class="col-md-12 section">
+        <h4>
+            اطلاعات خریدار:
+        </h4>
+        <div class="col-md-12">
+            <span class="title">نام خریدار :</span>
+            <span class="value">@Model.BuyerName</span>
+        </div>
+        <div class="col-md-6">
+            <span class="title">شناسه ملی :</span>
+            <span class="value">@Model.BuyerNationalCode</span>
+        </div>
+        <div class="col-md-6">
+            <span class="title">شناسه اقتصادی :</span>
+            <span class="value">@Model.BuyerEconomicCode</span>
+        </div>
+        <div class="col-md-6">
+            <span class="title">کد پستی :</span>
+            <span class="value">@Model.BuyerPostalCode</span>
+        </div>
+        <div class="col-md-6">
+            <span class="title">موبایل :</span>
+            <span class="value">@Model.BuyerMobile</span>
+        </div>
+        <div class="col-md-12">
+            <span class="title">آدرس :</span>
+            <span class="value">@Model.BuyerAddress</span>
+        </div>
+    </div>
+
+
+    <hr style="width:100%" />
+
+
+    <div class="col-md-12 section">
+        <h4>
+            اطلاعات اولیه ارسال به سامانه مالیاتی:
+        </h4>
+        <div class="col-md-6">
+            <span class="title">تاریخ ارسال :</span>
+            <span class="value">@Model.SendDateFa</span>
+        </div>
+        <div class="col-md-6">
+            <span class="title">Uid :</span>
+            <span class="value">@Model.TaxUid</span>
+        </div>
+        <div class="col-md-6">
+            <span class="title">شماره مرجع :</span>
+            <span class="value">@Model.TaxRefNumber</span>
+        </div>
+        <div class="col-md-6">
+            <span class="title">کد خطا :</span>
+            <span class="value">@Model.TaxErrorCode</span>
+        </div>
+        <div class="col-md-6">
+            <span class="title">توضیحات خطا :</span>
+            <span class="value">@Model.TaxErrorDetail</span>
+        </div>
+    </div>
+
+
+    <hr style="width:100%" />
+
+
+    <div class="col-md-12 section">
+        <h4>
+            اطلاعات استعلام از سامانه مالیاتی:
+        </h4>
+        <div class="col-md-6">
+            <span class="title">وضعیت استعلام :</span>
+            <span class="value">@Model.TaxStatus</span>
+        </div>
+        <div class="col-md-6">
+            <span class="title">نوع بسته دریافتی :</span>
+            <span class="value">@Model.TaxPacketType</span>
+        </div>
+        <div class="col-md-12">
+            <span class="title">توضیحات وضعیت استعلام :</span>
+            <span class="value">@Model.TaxStatusMessage</span>
+        </div>
+        <div class="col-md-12">
+            <span class="title">نتیجه استعلام :</span>
+            <pre class="value json" style="direction:ltr; text-align:left">@Model.TaxInquiryData</pre>
+        </div>
+    </div>
+</div>
+
+

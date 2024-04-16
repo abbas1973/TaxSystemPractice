@@ -1,0 +1,21 @@
+﻿@using Application.DTOs.Claims
+
+
+<li class="nav-item">
+    <a data-toggle="collapse" href="#baseinfo">
+        <i class="">پای</i>
+        <p>
+            اطلاعات پایه
+            <b class="caret"></b>
+        </p>
+    </a>
+    <div class="collapse" id="baseinfo">
+        <ul class="nav">
+
+            <partial name="_SingleMenuItem" model="@(new MenuDTO("مدیریت استان ها", "Shared", "Provinces", "Index"))" />
+            <partial name="_SingleMenuItem" model="@(new MenuDTO("مدیریت شهر ها", "Shared", "Cities", "Index"))" />
+
+        </ul>
+    </div>
+</li>
+

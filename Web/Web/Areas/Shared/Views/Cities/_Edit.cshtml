@@ -1,0 +1,68 @@
+﻿@using Application.Features.Web.Cities;
+@model CityUpdateDTO
+
+<div class="modal-header">
+    <button type="button" class="close" title="بستن پنجره" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="modal5-label">
+        ویرایش شهر
+    </h4>
+</div>
+
+<div class="modal-body row">
+
+    <div class="col-md-12">
+        <form asp-action="Edit" class="edit-form" onsubmit="return entity.edit.save(event)">
+            <div class="form-horizontal">
+
+                <input type="hidden" asp-for="Id" />
+
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="error text-center text-danger edit-error">@ViewBag.Error</div>
+
+
+                <div class="col-md-12">
+                    <div class="form-group col-md-12">
+                        <label asp-for="Name" class="control-label text-right col-md-12 required"></label>
+                        <div class="col-md-12">
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label asp-for="ProvinceId" class="control-label text-right col-md-12 required"></label>
+                        <div class="col-md-12">
+                            <select asp-for="ProvinceId" class="selectpicker" data-live-search="true" data-size="7" tabindex="-98" data-style="select-with-transition" asp-items="ViewBag.Provinces"></select>
+                            <span asp-validation-for="ProvinceId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <div class="togglebutton col-md-12">
+                            <label>
+                                <input asp-for="IsEnabled" type="checkbox" />
+                                فعال باشد
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group col-md-12 text-center">
+                    <button type="submit" class="btn btn-success">
+                        <i class="material-icons">send</i>
+                        ذخیره اطلاعات
+                    </button>
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+

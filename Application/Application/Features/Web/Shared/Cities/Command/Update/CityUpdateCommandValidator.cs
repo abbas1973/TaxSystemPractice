@@ -1,0 +1,24 @@
+﻿using Application.Repositories;
+using FluentValidation;
+using Resources;
+
+namespace Application.Features.Web.Cities
+{
+    public class CityUpdateCommandValidator : AbstractValidator<CityUpdateCommand>
+    {
+        private string _errorRequired = string.Format(Messages.ErrorRequired, "{PropertyName}");
+        private string _errorMaxLength = string.Format(Messages.ErrorMaxLength, "{PropertyName}", "{MaxLength}");
+        private string _errorGreaterThan = string.Format(Messages.ErrorGreaterThan, "{PropertyName}", "{ComparisonValue}");
+
+        public CityUpdateCommandValidator(IUnitOfWork uow)
+        {
+            RuleFor(x => x.Name)
+                .NotEmpty().WithMessage(_errorRequired)
+                .MaximumLength(100).WithMessage(_errorMaxLength);
+
+            RuleFor(x => x.ProvinceId)
+                .GreaterThan(0).WithMessage(_errorGreaterThan);
+
+        }
+    }
+}

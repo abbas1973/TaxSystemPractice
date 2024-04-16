@@ -1,0 +1,420 @@
+﻿@using Domain.Entities
+@using Application.Features.Web.Invoices;
+@model InvoiceCreateCommand
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="col-md-12">
+    <div class="card main-card">
+        <div class="card-header card-header-icon" data-background-color="purple">
+            <i class="material-icons">assignment</i>
+        </div>
+        <div class="card-content">
+            <h4 class="card-title">
+                افزودن صورت حساب جدید
+            </h4>
+            <div class="toolbar">
+                <p>
+                </p>
+            </div>
+
+            <div class="col-md-12">
+                <form asp-action="Create" class="create-form" onsubmit="return entity.create.save(event)">
+                    <hr />
+
+
+
+                    <section class="col-md-12">
+                        <span class="section-title">اطلاعات اولیه صورت حساب</span>
+                        <div class="col-md-12">
+                            <div class="form-group col-md-2">
+                                <label asp-for="InvoiceNumber" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12" id="VueInvoiceNumber">
+                                    <input asp-for="InvoiceNumber" class="form-control" />
+                                    <span asp-validation-for="InvoiceNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label asp-for="InvoiceDate" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12" style=" display:block; margin-top:10px">
+                                    <div id="VueInvoiceDate" style="display:block;">
+                                        <date-picker v-model="date"
+                                                     type="date"
+                                                     editable="true"
+                                                     auto-submit="true"
+                                                     input-class="form-control"
+                                                     alt-format="YYYY-MM-DD HH:mm:ss"
+                                                     alt-name="InvoiceDate">
+                                        </date-picker>
+                                    </div>
+                                    <span asp-validation-for="InvoiceDate" class="date"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label asp-for="BuyerIsRealOrLegal" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12">
+                                    <div>
+                                        <select asp-for="BuyerIsRealOrLegal"
+                                                class="selectpicker"
+                                                data-size="10"
+                                                tabindex="-98"
+                                                data-style="select-with-transition"
+                                                asp-items="@ViewBag.BuyerTypes">
+                                        </select>
+                                    </div>
+                                    <span asp-validation-for="BuyerIsRealOrLegal" class="checkbox"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label asp-for="BuyerName" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12" id="VueBuyerName">
+                                    <input asp-for="BuyerName" class="form-control" />
+                                    <span asp-validation-for="BuyerName" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label asp-for="BuyerNationalCode" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12" id="VueBuyerNationalCode">
+                                    <input asp-for="BuyerNationalCode" class="form-control" />
+                                    <span asp-validation-for="BuyerNationalCode" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label asp-for="BuyerEconomicCode" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12" id="VueBuyerEconomicCode">
+                                    <input asp-for="BuyerEconomicCode" class="form-control" />
+                                    <span asp-validation-for="BuyerEconomicCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+
+                            <div class="form-group col-md-2">
+                                <label asp-for="BuyerMobile" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12" id="VueBuyerMobile">
+                                    <input asp-for="BuyerMobile" class="form-control" />
+                                    <span asp-validation-for="BuyerMobile" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label asp-for="BuyerPhone" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12" id="VueBuyerPhone">
+                                    <input asp-for="BuyerPhone" class="form-control" />
+                                    <span asp-validation-for="BuyerPhone" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label asp-for="BuyerAddress" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12" id="VueBuyerAddress">
+                                    <input asp-for="BuyerAddress" class="form-control" />
+                                    <span asp-validation-for="BuyerAddress" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label asp-for="BuyerPostalCode" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12" id="VueBuyerPostalCode">
+                                    <input asp-for="BuyerPostalCode" class="form-control" />
+                                    <span asp-validation-for="BuyerPostalCode" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+
+                    <section class="col-md-12">
+                        <span class="section-title">اطلاعات سامانه مالیاتی</span>
+                        <div class="col-md-12">
+                            <div class="form-group col-md-2">
+                                <label asp-for="TaxInvoiceType" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12">
+                                    <div>
+                                        <select asp-for="TaxInvoiceType"
+                                                class="selectpicker"
+                                                data-size="10"
+                                                tabindex="-98"
+                                                data-style="select-with-transition"
+                                                asp-items="@ViewBag.invoiceTypes">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label asp-for="PayType" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12">
+                                    <div>
+                                        <select asp-for="PayType"
+                                                class="selectpicker"
+                                                data-size="10"
+                                                tabindex="-98"
+                                                data-style="select-with-transition"
+                                                asp-items="@ViewBag.InvoicePayTypes">
+                                        </select>
+                                    </div>
+                                    <span asp-validation-for="PayType" class="checkbox"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label asp-for="TaxInvoicePattern" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12">
+                                    <div>
+                                        <select asp-for="TaxInvoicePattern"
+                                                class="selectpicker"
+                                                data-size="10"
+                                                tabindex="-98"
+                                                data-style="select-with-transition"
+                                                onchange="entity.form.changePattern()"
+                                                asp-items="@ViewBag.invoicePatterns">
+                                        </select>
+                                    </div>
+                                    <span asp-validation-for="TaxInvoicePattern" class="checkbox"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label asp-for="TaxInvoiceSubject" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12">
+                                    <div>
+                                        <select asp-for="TaxInvoiceSubject"
+                                                class="selectpicker"
+                                                data-size="10"
+                                                tabindex="-98"
+                                                data-style="select-with-transition"
+                                                asp-items="@ViewBag.InvoiceSubjects">
+                                        </select>
+                                    </div>
+                                    <span asp-validation-for="TaxInvoiceSubject" class="checkbox"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label asp-for="Description" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12">
+                                    <input asp-for="Description" class="form-control" />
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2 contract-id-section" style="display:none">
+                                <label asp-for="ContractId" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12">
+                                    <input asp-for="ContractId" class="form-control" />
+                                    <span asp-validation-for="ContractId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <section class="col-md-12">
+                        <span class="section-title">آیتم های صورت حساب</span>
+                        <div class="col-md-12" id="VueBillingDetails">
+                            <div class="form-group col-md-2">
+                                <label class="control-label text-right col-md-12">نام کالا/ خدمت</label>
+                                <div class="col-md-12">
+                                    <input id="invoiceItemName" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label class="control-label text-right col-md-12">کد کالا/ خدمت</label>
+                                <div class="col-md-12">
+                                    <input id="invoiceItemCode" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label class="control-label text-right col-md-12">تعداد</label>
+                                <div class="col-md-12">
+                                    <input id="invoiceItemQuantity" class="form-control" type="number" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label class="control-label text-right col-md-12">واحد اندازه گیری</label>
+                                <div class="col-md-12">
+                                    <input id="invoiceItemCountingUnitName" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label class="control-label text-right col-md-12">قیمت واحد</label>
+                                <div class="col-md-12">
+                                    <input id="invoiceItemUnitPrice" class="form-control" type="number" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label class="control-label text-right col-md-12"> میزان تخفیف</label>
+                                <div class="col-md-12">
+                                    <input id="invoiceItemDiscountAmount" class="form-control" type="number" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label class="control-label text-right col-md-12">درصد مالیات</label>
+                                <div class="col-md-12">
+                                    <input id="invoiceItemTaxRate" class="form-control" type="number" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label class="control-label text-right col-md-12">مبلغ مالیات</label>
+                                <div class="col-md-12">
+                                    <input id="invoiceItemTaxAmount" class="form-control" type="number" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label class="control-label text-right col-md-12">سایر مالیات، عوارض و وجوه قانونی</label>
+                                <div class="col-md-12">
+                                    <input id="invoiceItemOtherTaxAmount" class="form-control" type="number" />
+                                </div>
+
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <button type="button" style="margin-top:20px;" class="btn btn-just-icon btn-info" title="افزودن آیتم صورتحساب" data-toggle="tooltip" onclick="invoiceItem.add()">
+                                    <i class="material-icons">add_circle</i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="material-datatables col-md-12" style="padding:30px 0px;">
+                            <table id="invoice-item-table" class="table table-striped table-no-bordered table-hover" cellspacing="0" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            نام
+                                        </th>
+                                        <th>
+                                            کد
+                                        </th>
+                                        <th>
+                                            تعداد
+                                        </th>
+                                        <th>
+                                            قیمت واحد
+                                        </th>
+                                        <th>
+                                            واحد اندازه گیری
+                                        </th>
+                                        <th>
+                                            میزان تخفیف
+                                        </th>
+                                        <th>
+                                            نرخ مالیات
+                                        </th>
+                                        <th>
+                                            مبلغ مالیات
+                                        </th>
+                                        <th>
+                                            سایر مالیات
+                                        </th>
+                                        <th class="disabled-sorting"></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+
+                            </table>
+                        </div>
+                    </section>
+
+
+
+                    
+                    <section class="col-md-12">
+                        <span class="section-title">مبالغ صورتحساب</span>
+                        <div class="col-md-12">
+                            
+                            <div class="form-group col-md-2">
+                                <label asp-for="CashAmount" class="control-label text-right col-md-12"></label>
+                                <div class="col-md-12" id="VueCashAmount">
+                                    <input asp-for="CashAmount" class="form-control" />
+                                    <span asp-validation-for="CashAmount" class="number"></span>
+                                </div>
+                            </div>
+                        </div>                        
+                    </section>
+
+
+
+
+
+                    <div class="form-group col-md-12 text-center">
+                        <button type="submit" class="btn btn-success">
+                            <i class="material-icons">send</i>
+                            ذخیره کامل اطلاعات فرم
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <!--For DateTimePicker-->
+    <script src="~/assets/VuePersianDateTimePicker/vue.min.js"></script>
+    <script src="~/assets/VuePersianDateTimePicker/moment/moment.min.js"></script>
+    <script src="~/assets/VuePersianDateTimePicker/moment/moment-jalaali.js"></script>
+    <script src="~/assets/VuePersianDateTimePicker/dist/vue-persian-datetime-picker-browser.js"></script>
+
+
+    <script src="~/Areas/TaxSystem/js/AddInvoice.js" asp-append-version="true"></script>
+}
+
+
+@section Styles{
+    <style>
+        .main-card{
+            background:transparent;
+        }
+
+        section{
+            margin-bottom:30px;
+            background-color:#fff;
+            border-radius: 7px;
+            border: 2px solid #555;
+            padding-bottom:20px;
+        }
+
+        .section-title{
+            font-weight:bold;
+            display: inline-block;
+            background-color: #fff;
+            padding:5px 12px;
+            border:2px solid #555;
+            border-radius:30px;
+            position:absolute;
+            top: -15px;
+            right:30px;
+            z-index:1;
+        }
+
+    </style>
+}
+

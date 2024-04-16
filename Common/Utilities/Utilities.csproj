@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <!--<Nullable>enable</Nullable>-->
+
+	  <Copyright>(C) 2023, abbas.mn1973@gmail.com</Copyright>
+	  <Authors>abbas.mn1973@gmail.com</Authors>
+	  <Authors>abbas1973@github.com</Authors>
+  </PropertyGroup>
+
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="Myrmec" Version="1.2.0" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+  </ItemGroup>
+
+</Project>

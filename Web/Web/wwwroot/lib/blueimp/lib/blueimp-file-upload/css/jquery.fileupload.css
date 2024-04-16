@@ -1,0 +1,116 @@
+﻿@charset "UTF-8";
+/*
+ * jQuery File Upload Plugin CSS
+ * https://github.com/blueimp/jQuery-File-Upload
+ *
+ * Copyright 2013, Sebastian Tschan
+ * https://blueimp.net
+ *
+ * Licensed under the MIT license:
+ * https://opensource.org/licenses/MIT
+ */
+
+
+.file-upload{
+    margin-top:10px;
+}
+
+.file-upload-title i {
+    transform: translateY(5px);
+}
+
+
+
+#fileupload table .preview img,
+uploaded-files-table img {
+    outline: none !important;
+}
+
+.uploaded-files label i {
+    transform: translateY(7px);
+}
+
+
+.fileinput-button {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+.fileinput-button input {
+  position: absolute;
+  display:none;
+  top: 0;
+  right: 0;
+  width:100%;
+  height:100%;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px !important;
+  direction: ltr;
+  cursor: pointer !important;
+}
+
+/* Fixes for IE < 8 */
+@media screen\9 {
+  .fileinput-button input {
+    filter: alpha(opacity=0);
+    font-size: 100%;
+    height: 100%;
+  }
+}
+
+
+#fileupload input[type='checkbox']{
+    display:none;
+}
+
+#fileupload label.checkbox {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    transform: translateY(8px);
+    margin-right: 20px;
+}
+
+#fileupload label.checkbox.delete-all {
+    transform: translateY(20px);
+}
+
+
+    #fileupload label.checkbox span {
+        display: inline-block;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+    }
+
+
+
+    #fileupload input[type='checkbox'] + span {        
+        background: url('../img/uncheck1.png') no-repeat center center;
+        background-size: 20px;
+    }
+
+
+
+    #fileupload input[type='checkbox']:checked + span {
+        background: url('../img/check1.png') no-repeat center center;
+        background-size: 20px;
+    }
+
+
+#fileupload table .preview img {
+    max-height: 70px;
+    max-width:70px;
+}
+
+
+#fileupload td .size{
+    text-align:center;
+    direction:ltr;
+}
