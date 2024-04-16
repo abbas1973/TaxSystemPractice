@@ -257,13 +257,6 @@ var entity = {
                         data: "sendStatus",
                         render: function (data, type, row) {
                             var st = `<div>${row.sendStatusFa}</div>`;
-
-                            if(row.isSendable)
-                                st += `<button type="button" class="btn btn-xs btn-success" onclick="entity.sendToTax(${row.id})" data-toggle="tooltip" title="ارسال به سامانه مودیان مالیاتی">ارسال صورتحساب</button>`;
-                                
-                            if (row.isInquiryable)
-                                st += `<button type="button" class="btn btn-xs btn-success" onclick="entity.inquiry(${row.id})" data-toggle="tooltip" title="استعلام وضعیت از سامانه مودیان مالیاتی">استعلام صورتحساب</button>`;
-
                             return st;
                         }
                     },
@@ -281,7 +274,7 @@ var entity = {
                         className: "text-left",
                         render: function (data, type, row) {
                             var btns = "";
-                            //btns += "<a onclick='entity.edit.loadForm(" + data.id + ")' class='btn btn-simple btn-info btn-icon' title='ویرایش' data-toggle='tooltip'><i class='material-icons'>edit</i></a>";
+                            btns += "<a onclick='entity.edit.loadForm(" + data.id + ")' class='btn btn-simple btn-info btn-icon' title='ویرایش' data-toggle='tooltip'><i class='material-icons'>edit</i></a>";
                             btns += "<a onclick='entity.details(" + data.id + ")' class='btn btn-simple btn-primary btn-icon' title='جزییات' data-toggle='tooltip'><i class='material-icons'>dvr</i></a>";
 
                             if(row.isDeleteable)
@@ -381,62 +374,6 @@ var entity = {
         if (queryString.length > 0)
             url += "?" + queryString;
         window.open(url);
-    },
-
-
-    // ارسال
-    sendToTax: (id) => {
-        var ids = [];
-        if (id)
-            ids.push(id);
-        else
-            ids = entity.list.selectedItems;
-
-        if (!ids || ids.length == 0) {
-            showNotification('صورتحساب مورد نظر را انتخاب کنید!', 'danger');
-            return;
-        }
-
-        $.post(_baseUrl + "sendToTax",
-            {
-                InvoiceIds: ids
-            },
-            function (res) {
-                if (res.isSuccess == false)
-                    showNotification(res.message, 'danger');
-                else {
-                    showNotification('صورتحساب ها با موقیت به سامانه مالیاتی ارسال شدند. وضعیت صورتحساب های ارسال شده بصورت خودکار تا 20 ثانیه دیگر از سامانه مالیاتی استعلام گرفته میشود.', 'success');
-                    entity.list.reload();
-                }
-            });
-    },
-
-
-    // استعلام
-    inquiry: (id) => {
-        var ids = [];
-        if (id)
-            ids.push(id);
-        else
-            ids = entity.list.selectedItems;
-
-        if (!ids || ids.length == 0) {
-            showNotification('صورتحساب مورد نظر را انتخاب کنید!', 'danger');
-            return;
-        }
-
-        $.post(_baseUrl + "inquiry",
-            {
-                InvoiceIds: ids
-            },
-            function (res) {
-                if (res.isSuccess == false)
-                    showNotification(res.message, 'danger');
-                else {
-                    entity.list.reload();
-                    showNotification('استعلام صورتحساب ها با موفقیت انجام شد. نتیجه استعلام را میتوانید در جزییات صورتحساب مشاهده کنید.', 'success');
-                }
-            });
     },
 
 
